@@ -28,7 +28,10 @@ async def scrape_to_json(base_url: str, output_file: str = "scraped_data.json", 
     }
  
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False, args=["--start-maximized"])
+        browser = await p.chromium.launch(headless=False,
+                                          args=["--no-sandbox", "--disable-setuid-sandbox"]
+                                          )
+         #   args=["--start-maximized"]
         context = await browser.new_context(
             viewport={"width": 1280, "height": 800},
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0",
