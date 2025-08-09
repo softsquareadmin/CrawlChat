@@ -8,3 +8,4 @@ st.markdown("""
 - 🕷️ **Website Scraper**: Crawl and extract website content  
 - 💬 **Chat with Data**: Ask questions about the scraped content  
 """)
+
