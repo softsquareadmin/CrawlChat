@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
 import streamlit as st
 import pineconeDataLoad as pineconeDataLoad
+import subprocess
+
+subprocess.run(["playwright", "install", "chromium"])
  
  
 def call_pinecone(fileName):

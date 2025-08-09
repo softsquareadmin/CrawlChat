@@ -4,3 +4,4 @@ playwright
 openai
 python-dotenv
 pinecone==7.3.0
+playwright install chromium
