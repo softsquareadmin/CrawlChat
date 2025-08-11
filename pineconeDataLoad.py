@@ -38,23 +38,34 @@ def clean_text(obj):
 
 def uploadFileOnPonecone(input_path):
     print(f"📥 Uploading file to Pinecone: {input_path}")
-    
-    # ---- Load the chunked JSON ----
+ 
+    # ---- Reset Pinecone Index ----
+    try:
+        print("🧹 Clearing existing vectors from Pinecone index...")
+        pc = Pinecone(api_key=pinecone_api_key)
+        index = pc.Index(pinecone_index_name)
+        index.delete(delete_all=True)
+        print("✅ Pinecone index cleared.")
+        print(index.describe_index_stats())
+    except Exception as e:
+        print(f"⚠️ Failed to clear index: {e}")
+        return
+ 
+    # ---- Load & clean the JSON ----
     with open(input_path, "r", encoding="utf-8") as f:
         raw_docs = json.load(f)
-        
     print(f"📦 Loaded {len(raw_docs)} chunks for embedding.")
-    
+   
     cleaned_data = clean_text(raw_docs)
-    
     with open('cleaned_file.json', 'w', encoding='utf-8') as f:
         json.dump(cleaned_data, f, indent=2, ensure_ascii=False)
-    
-    print("Cleaned JSON saved as cleaned_file.json")
-    
+    print("✅ Cleaned JSON saved as cleaned_file.json")
+   
+    # ---- Load cleaned data ----
     with open("cleaned_file.json", "r", encoding="utf-8") as f:
         raw_dict = json.load(f)
-
+ 
+    # ---- Chunk content ----
     chunked_docs = []
     chunk_size = 1000
     for url, content in raw_dict.items():
@@ -65,30 +76,26 @@ def uploadFileOnPonecone(input_path):
                 "url": url,
                 "text": chunk
             })
-            
-        
-    
-    # ---- Prepare vectors for Pinecone ----
+ 
+    # ---- Prepare vectors ----
     vectors = []
-    MAX_CHARS = 8000
     print("🔄 Generating embeddings...")
     for doc in tqdm(chunked_docs, desc="Embedding chunks"):
-        # print("Processing chunk: ", doc)
-        vector_id = doc["id"]  # Unique ID like url#chunk-0
-        embedding = get_embedding(doc["text"])  # 1536-dim vector
+        vector_id = doc["id"]
+        embedding = get_embedding(doc["text"])
         metadata = {
-            "url": doc["url"],  # Store original URL
-            "text": doc["text"][:500]  # Store partial text (limit size in metadata)
+            "url": doc["url"],
+            "text": doc["text"][:500]
         }
         vectors.append((vector_id, embedding, metadata))
-    
+ 
     # ---- Upsert in Batches ----
-    batch_size = 100  # Recommended batch size
+    batch_size = 100
     print("⬆️ Upserting vectors to Pinecone...")
     for i in tqdm(range(0, len(vectors), batch_size), desc="Upserting batches"):
         batch = vectors[i:i + batch_size]
         index.upsert(vectors=batch)
-    
+ 
     print("✅ All embeddings successfully upserted to Pinecone.")
     
     # ---- Function: Get OpenAI Embedding ----
