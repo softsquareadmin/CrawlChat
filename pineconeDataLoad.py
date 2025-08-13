@@ -41,11 +41,29 @@ def uploadFileOnPonecone(input_path):
  
     # ---- Reset Pinecone Index ----
     try:
-        print("🧹 Clearing existing vectors from Pinecone index...")
+        print("🧹 Checking Pinecone index before clearing...")
+
         pc = Pinecone(api_key=pinecone_api_key)
         index = pc.Index(pinecone_index_name)
-        index.delete(delete_all=True)
-        print("✅ Pinecone index cleared.")
+
+        # Get current stats
+        stats = index.describe_index_stats()
+        total_vectors = stats.get("total_vector_count", 0)
+
+        if total_vectors == 0:
+            print("ℹ️ Index is already empty. No deletion needed.")
+        else:
+            print(f"📦 Found {total_vectors} vectors. Proceeding to clear...")
+            try:
+                # Loop through all namespaces to delete
+                for namespace in stats.get("namespaces", {}).keys():
+                    print(f"🗑 Deleting namespace: '{namespace or 'default'}' ...")
+                    index.delete(delete_all=True, namespace=namespace)
+                print("✅ Pinecone index cleared.")
+            except Exception as e:
+                print(f"⚠️ Failed to clear index: {e}")
+
+        # Show stats after action
         print(index.describe_index_stats())
     except Exception as e:
         print(f"⚠️ Failed to clear index: {e}")
