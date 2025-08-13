@@ -8,9 +8,8 @@ from playwright.async_api import async_playwright
 import streamlit as st
 import pineconeDataLoad as pineconeDataLoad
 import subprocess
-import random
-from playwright.async_api import async_playwright
 
+subprocess.run(["playwright", "install", "chromium"])
 
 @st.cache_resource(show_spinner=False)
 def ensure_playwright_browsers():
