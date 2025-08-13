@@ -2,8 +2,10 @@ import streamlit as st
 from chat_module import embed_query, search_pinecone, generate_gpt_reply, OpenAIError
  
 # ---- Streamlit Page Config ----
-st.set_page_config(page_title="Softsquare AI Chatbot", layout="centered")
+# st.set_page_config(page_title="Softsquare AI Chatbot", layout="centered")
 # st.title("Softsquare AI Chatbot")
+st.title("AI Chatbot")
+
  
 # ---- CSS ----
 st.markdown("""
@@ -41,7 +43,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
  
-st.markdown('<div class="fixed-title">Softsquare AI Chatbot</div>', unsafe_allow_html=True)
+# st.markdown('<div class="fixed-title">AI Chatbot</div>', unsafe_allow_html=True)
  
  
 # ---- Custom Avatars ----
