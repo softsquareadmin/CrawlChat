@@ -19,6 +19,22 @@ st.markdown("""
     
 """, unsafe_allow_html=True)
 
+
+
+### Newly Added  
+st.markdown(
+    """
+    <style>
+    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+    ._container_gzau3_1, ._profileContainer_gzau3_53,
+    .viewerBadge_text__1JaDK {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown(
     """
     <style>
@@ -33,7 +49,84 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown(
+    """
+    <style>
+    /* Ensure the entire page uses a flexbox layout */
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Chat container styling */
+    .stApp {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Chat input should stick to the bottom */
+    .stChatInput {
+        position: fixed;
+        bottom: 0;
+        width: 95%;
+        max-width: 800px; /* Adjust based on your design */
+        margin: 0 auto;
+        z-index: 9999;
+        border-top: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+    </style>
+    """,
+    # margin-bottom: 50px;
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <style>
+    /* Hide the span tag by class name */
+    .st-emotion-cache-gi0tri.e1nzilvr1 {
+        display: none !important;
+    }
+
+    /* Optional: Hide the span tag with a specific data-testid */
+    [data-testid="stHeaderActionElements"] {
+        display: none !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <style>
+        div img[alt="App Creator Avatar"] {
+            display: none !important;
+        }
  
+        a[href="https://streamlit.io/cloud"] {
+            display: none !important;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+ 
+ 
+ 
+ 
+ 
+ 
+ ### Old Code Snippet
 # ---- CSS ----
 st.markdown("""
     <style>
