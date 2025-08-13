@@ -5,6 +5,12 @@ from chat_module import embed_query, search_pinecone, generate_gpt_reply, OpenAI
 # st.set_page_config(page_title="Softsquare AI Chatbot", layout="centered")
 # st.title("Softsquare AI Chatbot")
 # st.title("AI Chatbot")
+
+st.set_page_config(
+    page_title="AI Chatbot",
+)
+
+
 st.markdown("""
     <h1 id="chat-header" style="
                    top: 0;
