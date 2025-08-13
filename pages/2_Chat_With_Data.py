@@ -11,19 +11,71 @@ st.set_page_config(
 )
 
 
-st.markdown("""
-    <h1 id="chat-header" style="
-                   top: 0;
-                   left: 0;
-                   width: 100%;
-                   text-align: center;
-                   background-color: #f1f1f1;
-                   z-index: 9
-                  ">
-        AI Chatbot
-    </h1>
-    
+# LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+
+st.markdown(f"""
+    <style>
+      /* Professional, minimal header that *sticks* to the top */
+      #app-top-header {{
+        position: sticky;        /* <-- key change (no overlap) */
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: transparent; /* no background as requested */
+        color: #1f2937;          /* neutral dark text */
+        font-weight: 800;
+        font-size: clamp(18px, 2.2vw, 28px);
+        line-height: 1.1;
+        margin: 0 0 6px 0;       /* small space below header */
+      }}
+
+      #app-top-header img {{
+        height: 40px;            /* logo size */
+        width: auto;
+      }}
+
+      /* subtle hairline under header so it feels intentional */
+      #app-top-header::after {{
+        content: "";
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 1px;
+        background: rgba(0,0,0,0.06);
+      }}
+
+      /* Optional: make the central page a bit wider for a chat app feel */
+      [data-testid="stAppViewContainer"] .main .block-container {{
+        max-width: 900px;
+      }}
+    </style>
+
+    <div id="app-top-header">
+      
+      <span>AI Chatbot</span>
+    </div>
 """, unsafe_allow_html=True)
+
+# <img src="{LOGO_URL}" alt="Logo" />
+
+
+
+# st.markdown("""
+#     <h1 id="chat-header" style="
+#                    top: 0;
+#                    left: 0;
+#                    width: 100%;
+#                    text-align: center;
+#                    background-color: #f1f1f1;
+#                    z-index: 9
+#                   ">
+#         AI Chatbot
+#     </h1>
+    
+# """, unsafe_allow_html=True)
 
 
 
