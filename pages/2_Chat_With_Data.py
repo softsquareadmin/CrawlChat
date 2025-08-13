@@ -4,7 +4,20 @@ from chat_module import embed_query, search_pinecone, generate_gpt_reply, OpenAI
 # ---- Streamlit Page Config ----
 # st.set_page_config(page_title="Softsquare AI Chatbot", layout="centered")
 # st.title("Softsquare AI Chatbot")
-st.title("AI Chatbot")
+# st.title("AI Chatbot")
+st.markdown("""
+    <h1 id="chat-header" style="position: fixed;
+                   top: 0;
+                   left: 0;
+                   width: 100%;
+                   text-align: center;
+                   background-color: #f1f1f1;
+                   z-index: 9
+                  ">
+        AI Chatbot
+    </h1>
+    
+""", unsafe_allow_html=True)
 
  
 # ---- CSS ----
