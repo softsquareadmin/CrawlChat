@@ -24,7 +24,6 @@ st.markdown("""
 st.markdown("""
     <style>
     .fixed-title {
-        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
