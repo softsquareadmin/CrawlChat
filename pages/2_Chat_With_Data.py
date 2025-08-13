@@ -6,7 +6,7 @@ from chat_module import embed_query, search_pinecone, generate_gpt_reply, OpenAI
 # st.title("Softsquare AI Chatbot")
 # st.title("AI Chatbot")
 st.markdown("""
-    <h1 id="chat-header" style="position: fixed;
+    <h1 id="chat-header" style="
                    top: 0;
                    left: 0;
                    width: 100%;
